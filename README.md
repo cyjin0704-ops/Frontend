@@ -1,44 +1,12 @@
-# skala-vue
+# Frontend
+## P097 조용진
 
-This template should help get you started developing with Vue 3 in Vite.
+### 1. Vue single file component
+Vue component는 일반적으로 하나의 .vue 파일 안에 작성하는데, <'script setup'>을 사용하면 작성한 변수와 가져온 컴포넌트를 <'template'>에서 바로 사용할 수 있다.
 
-## Recommended IDE Setup
+### 2. 컴포넌트 사용
+작성한 자식 컴포넌트를 App.vue에서 import한 뒤 태그 형태로 사용했는데, 이를 통해 화면을 기능별 컴포넌트로 나누어 관리할 수 있다는 것을 배웠다.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+### 3. 일반 변수와 반응형 변수
+일반 변수의 값은 JS 내부에서 변경되지만, 값이 변경됐다는 사실을 vue가 추적하지 않으므로 화면이 즉시 갱신되지 않는다. 
+반면 ref()로 만든 변수는 vue가 값의 변화를 추적한다. 따라서 변경되면 관련된 하면이 자동으로 다시 렌더링된다.
