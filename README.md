@@ -58,3 +58,12 @@ v-memo는 지정한 값이 변경될 때만 해당 영역을 다시 렌더링한
 
 ### 18. 이벤트 수식어
 `event-modifier-example.vue`로 분리하고 .prevent와 .stop 기능만 확인할 수 있게 구성했다. .prevent로 링크의 기본 이동을 막고, .stop으로 자식 요소의 클릭 이벤트가 부모 요소로 전달되는 이벤트 버블링을 차단했다.
+
+### 19. Form 데이터 바인딩
+`form-elements-handling-example.vue`로 분리하여 textarea, checkbox, radio, select와 v-model을 연결했다. 단일 checkbox는 Boolean으로, 다중 checkbox는 선택된 값이 배열로 저장되는 것을 확인했다.
+
+### 20. v-model 수식어
+`v-model-modifiers-example.vue`에서 .lazy, .number, .trim 수식어를 각각 실습했다. 입력값의 반영 시점을 변경하고 숫자 타입으로 변환하거나 앞뒤 공백을 제거할 수 있으며, 여러 수식어를 함께 사용할 수도 있다는 것을 배웠다.
+
+### 21. Vue Style
+`vue-style-example.vue`로 분리하고 강의안에서 참조한 외부 스타일 파일이 없어 `challenge.css`를 직접 추가했다. scoped 스타일은 현재 컴포넌트에만 적용되고, @import를 사용하면 외부 CSS의 버튼 스타일을 불러올 수 있다는 것을 확인했다.

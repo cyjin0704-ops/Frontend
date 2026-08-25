@@ -1,8 +1,8 @@
 <script setup>
-import VueHTML from './components/practices/basic/VueHTML.vue'
+import EventObjectExample from './components/practices/basic/P. 105 code challenge-Vue Event Handling/event-object-example.vue'
 </script>
 <template>
   <div style="padding: 20px">
-    <VueHTML />
+    <EventObjectExample />
   </div> 
 </template>
