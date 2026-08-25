@@ -1,9 +1,9 @@
 <script setup>
-import ReactiveExample from './components/practices/basic/P. 126 code challenge-Reactive state/reactive()-example.vue'
+import WatchMultiSourceExample from './components/practices/basic/P. 144 code challenge-Computed&Watchers/watch()-multi-source-example.vue'
 </script>
 
 <template>
   <div style="padding: 20px">
-    <ReactiveExample />
+    <WatchMultiSourceExample />
   </div>
 </template>
