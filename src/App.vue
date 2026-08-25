@@ -1,8 +1,9 @@
 <script setup>
-import EventObjectExample from './components/practices/basic/P. 105 code challenge-Vue Event Handling/event-object-example.vue'
+import ReactiveExample from './components/practices/basic/P. 126 code challenge-Reactive state/reactive()-example.vue'
 </script>
+
 <template>
   <div style="padding: 20px">
-    <EventObjectExample />
-  </div> 
+    <ReactiveExample />
+  </div>
 </template>
