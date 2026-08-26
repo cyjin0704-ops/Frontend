@@ -1,9 +1,15 @@
 <script setup>
-import LifecycleHookExample from './components/practices/basic/P. 155 code challenge-Component lifecycle/lifecycle-hook-example.vue'
+import SlotDefaultParent from './components/practices/basic/P. 177 code challenge-Component slot/SlotDefaultParent.vue'
+import SlotNamedParent from './components/practices/basic/P. 177 code challenge-Component slot/SlotNamedParent.vue'
+import SlotScopedParent from './components/practices/basic/P. 177 code challenge-Component slot/SlotScopedParent.vue'
 </script>
 
 <template>
   <div style="padding: 20px">
-    <LifecycleHookExample />
+    <SlotDefaultParent />
+    <hr />
+    <SlotNamedParent />
+    <hr />
+    <SlotScopedParent />
   </div>
 </template>

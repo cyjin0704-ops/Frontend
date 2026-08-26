@@ -107,3 +107,15 @@ reactive를 사용해 객체의 속성을 변경하고 배열에 항목을 추�
 
 ### 32. Component Lifecycle
 `lifecycle-hook-example.vue`에서 컴포넌트가 화면에 나타날 때 `onMounted`로 타이머를 시작하고, 반응형 데이터가 변경될 때 `onUpdated`가 실행되는 것을 Console에서 확인했다. 컴포넌트가 사라질 때는 `onUnmounted`에서 타이머를 정리했다. 처음에는 `onUpdated` 안에서 반응형 데이터를 다시 변경하면 계속 갱신될 수 있다는 점과, 타이머 같은 작업은 컴포넌트가 사라지기 전에 반드시 정리해야 한다는 점이 헷갈릴 수 있었다.
+
+### 33. Props & Emits
+`PropsEmitsParent.vue`와 `PropsEmitsChild.vue`를 작성해 부모가 props로 데이터를 내려주고, 자식은 emit으로 갱신 요청과 새로운 값을 부모에게 전달하도록 구성했다. props는 부모에서 자식으로 전달되고 emit은 자식에서 부모로 전달된다는 방향을 배웠다. 처음에는 template에서 `parentData`가 `parent-data`로, `update-request`가 `@update-request`로 작성되는 이름 표기 방식과 자식이 props를 직접 변경하면 안 된다는 점이 헷갈릴 수 있었다.
+
+### 34. Default Slot
+`SlotDefaultParent.vue`와 `SlotDefaultChild.vue`에서 이름이 없는 `<slot>`을 사용해 부모가 작성한 여러 형태의 HTML을 자식 컴포넌트 내부에 출력했다. 부모가 아무 내용도 전달하지 않으면 자식의 slot 태그 안에 작성한 기본 콘텐츠가 표시된다는 것을 배웠다.
+
+### 35. Named Slot
+Named Slot을 사용해 자식 컴포넌트의 header 영역과 기본 본문 영역에 서로 다른 내용을 주입했다. 자식은 `<slot name="header">`로 위치를 정하고 부모는 `<template #header>`로 대상을 지정하며, slot 이름이 서로 같아야 한다는 점이 헷갈릴 수 있었다.
+
+### 36. Scoped Slot
+`SlotScopedChild.vue`의 데이터를 slot 속성으로 부모에게 전달하고, 부모가 `v-slot="slotBag"`으로 받아 원하는 HTML에 출력했다. 일반 props와 달리 자식 컴포넌트가 가진 데이터를 부모가 slot 내용을 작성할 때 활용하는 방식이며, `slotBag.text`처럼 slot 객체를 통해 접근해야 한다는 점을 배웠다.
