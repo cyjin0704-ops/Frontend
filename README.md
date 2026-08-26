@@ -119,3 +119,6 @@ Named Slot을 사용해 자식 컴포넌트의 header 영역과 기본 본문 �
 
 ### 36. Scoped Slot
 `SlotScopedChild.vue`의 데이터를 slot 속성으로 부모에게 전달하고, 부모가 `v-slot="slotBag"`으로 받아 원하는 HTML에 출력했다. 일반 props와 달리 자식 컴포넌트가 가진 데이터를 부모가 slot 내용을 작성할 때 활용하는 방식이며, `slotBag.text`처럼 slot 객체를 통해 접근해야 한다는 점을 배웠다.
+
+### 37. Weather Component
+기존 날씨 화면을 `WeatherParent`, `BaseDashboardCard`, `SearchBar`, `WeatherCard`로 분리했다. 부모가 검색어와 날씨 데이터를 관리하고 props로 자식에게 전달하며, 자식은 검색어나 상세보기 이벤트를 emits로 부모에게 전달하도록 구성했다. `BaseDashboardCard`에는 slot을 사용해 검색창과 날씨 목록을 같은 카드 디자인 안에 넣었다. 추가 컴포넌트로 `WeatherStatusBar`를 만들어 검색 결과 개수와 선택한 도시의 날씨를 표시했다. 처음에는 props는 아래로 전달하고 emits는 위로 전달한다는 방향과, 이벤트 이름을 부모와 자식에서 동일하게 작성해야 한다는 점이 헷갈릴 수 있었다.
