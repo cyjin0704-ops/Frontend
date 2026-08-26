@@ -102,3 +102,8 @@ reactive를 사용해 객체의 속성을 변경하고 배열에 항목을 추�
 
 ### 31. Weather Composition
 `searchQuery`, `selectedCityInfo`, `weatherList`를 반응형 상태로 만들고 computed를 사용해 검색어가 포함된 도시만 출력했다. 도시 선택은 watch로 감시하고 검색어는 watchEffect로 추적했으며, 검색 결과가 없을 때는 안내 문구를 표시했다. 추가 기능으로 관심 도시를 저장하는 `favoriteCity`, 선택한 관심 도시의 정보를 찾는 computed, 관심 도시 변경을 기록하는 watcher를 작성했다. 처음에는 computed는 계산된 값을 만들고 watch는 값이 바뀐 뒤 별도의 작업을 실행한다는 역할 차이가 헷갈릴 수 있었다.
+
+## 26.08.26 (3일차)
+
+### 32. Component Lifecycle
+`lifecycle-hook-example.vue`에서 컴포넌트가 화면에 나타날 때 `onMounted`로 타이머를 시작하고, 반응형 데이터가 변경될 때 `onUpdated`가 실행되는 것을 Console에서 확인했다. 컴포넌트가 사라질 때는 `onUnmounted`에서 타이머를 정리했다. 처음에는 `onUpdated` 안에서 반응형 데이터를 다시 변경하면 계속 갱신될 수 있다는 점과, 타이머 같은 작업은 컴포넌트가 사라지기 전에 반드시 정리해야 한다는 점이 헷갈릴 수 있었다.
