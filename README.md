@@ -154,3 +154,87 @@ Weather Router 실습에 Pinia를 추가해 날씨 단위를 전역 상태로 �
 Pinia 스토어 파일의 기본 구조와 목록/상세 화면에서 같은 단위 상태를 사용하는 코드 초안을 작성할 때 AI 도구의 도움을 받았다. 비전공자이자 초보자 관점에서 state, getter, action의 역할을 구분하고 단위의 초기값이나 화면 문구를 바꾸는 정도는 직접 할 수 있었다. 반면 여러 화면에 같은 스토어를 연결하고 computed로 온도 변환 결과를 자동 갱신하는 구조는 아직 처음부터 혼자 작성하기 어려워 AI의 설명을 참고했다.
 
 AI가 작성한 결과는 강의안 요구사항과 다시 비교했으며 `npm run build`로 문법과 import 오류가 없는지 확인했다. 개발 서버를 실행해 홈과 상세 페이지가 정상 응답하는지 확인하고, 섭씨 원본 데이터가 변경되지 않은 상태에서 화씨 표시 값만 계산하도록 코드를 검토했다.
+
+
+### 41. Axios
+Axios를 설치하고 `AxiosWeather.vue`와 `AxiosJson.vue`에서 외부 API에 요청을 보내는 방법을 실습했다. `async/await`로 응답을 기다리고 `try/catch/finally`로 성공, 오류, 로딩 상태를 나누어 처리했다. JSONPlaceholder에서 출력되는 영어 문장은 오류가 아니라 API가 제공하는 연습용 게시글 데이터라는 점도 확인했다.
+
+1. 구현 기능
+- OpenWeather API에 GET 요청을 보내 위치, 현재 기온, 날씨 상태, 습도 출력
+- 요청 중에는 버튼을 비활성화하고 로딩 문구 표시
+- API 키 누락이나 통신 실패 시 오류 안내 문구 표시
+- JSONPlaceholder에서 게시글 3개를 GET으로 조회
+- 입력한 게시글을 POST로 추가하고 PUT으로 제목 수정, DELETE로 화면에서 삭제
+
+2. 실행 방법
+- 프로젝트 폴더에서 `npm install`을 실행해 의존성 설치
+- `.env.example`을 참고해 `.env` 파일에 `VITE_OPENWEATHER_API_KEY=발급받은_API_KEY` 작성
+- `npm run dev` 실행 후 터미널에 표시된 localhost 주소 접속
+- 날씨 데이터 가져오기 버튼과 게시글 추가·수정·삭제 버튼을 눌러 결과 확인
+
+3. 작성 및 수정한 내용
+- `package.json`에 Axios 의존성을 추가했다.
+- API 키를 소스에 직접 작성하지 않고 `import.meta.env.VITE_OPENWEATHER_API_KEY`로 불러오도록 수정했다.
+- OpenWeather 요청의 URL과 옵션을 Axios의 `params` 객체로 나누어 작성했다.
+- 강의안의 기본 GET 예제에 로딩 상태와 오류 메시지를 추가했다.
+- `AxiosJson.vue`에는 GET뿐 아니라 POST, PUT, DELETE 요청도 작성해 REST API의 기본 CRUD를 확인했다.
+
+4. AI 도구 사용 범위 및 결과 확인
+Axios 요청 함수와 `try/catch/finally` 구조, API 키를 환경 변수로 분리하는 코드 초안을 작성할 때 AI 도구의 도움을 받았다. 버튼 문구, 출력 항목, 요청할 게시글 개수와 같은 단순한 값은 직접 변경할 수 있었고, GET 요청 후 `response.data`를 반응형 변수에 저장해야 화면에 표시된다는 흐름도 코드를 보며 확인했다. 반면 비동기 처리와 환경 변수 설정, CRUD 요청마다 다른 Axios 메서드를 연결하는 부분은 아직 혼자 작성하기 어려워 설명을 참고했다.
+
+작성 결과는 `npm run build`로 문법과 import 오류가 없는지 확인했다. 개발 서버에서 JSONPlaceholder 게시글 3개가 화면에 출력되는 것도 직접 확인했으며, 표시된 영어 문장이 연습용 API 데이터라는 점을 확인했다. OpenWeather API 키는 저장소에 노출되지 않도록 `.env.example`에는 변수 이름만 남겼고, 실제 키가 있는 환경에서 버튼을 눌러 응답을 확인하도록 구성했다.
+
+
+### 42. Weather Axios
+기존 Weather Store의 Mock 데이터를 Axios로 받아온 실제 날씨 데이터로 변경했다. OpenWeatherMap에서 현재 날씨와 예보를 받아오고, Open-Meteo의 대기질 정보도 상세 화면에 함께 표시했다.
+
+1. 구현 기능
+- 서울, 수원, 부산, 인천의 현재 날씨 조회
+- 도시 검색과 상세 페이지 이동, 섭씨·화씨 단위 변경 유지
+- 상세 화면에서 5일 예보와 대기질 정보 표시
+- API 요청 중 로딩 표시와 요청 실패 안내
+
+2. 실행 방법
+- `Weather axios` 폴더의 `.env`에 `VITE_OPENWEATHER_API_KEY` 작성
+- `npm install` 후 `npm run dev` 실행
+- 도시를 검색하거나 상세보기 버튼을 눌러 API 결과 확인
+
+3. 작성 및 수정한 내용
+- `services/weatherApi.js`에 현재 날씨, 예보, 대기질 요청 함수를 작성했다.
+- 기존 Mock 데이터 대신 API 응답을 화면에 맞게 정리해서 사용했다.
+- 기존 Router와 Pinia 단위 변경 기능은 그대로 유지했다.
+
+4. AI 도구 사용 범위 및 결과 확인
+비동기 요청 함수와 서로 다른 API 응답을 화면 데이터로 바꾸는 부분에서 AI 도구의 도움을 받았다. 환경 변수 작성, 도시 목록과 화면 문구 확인은 직접 했고, `npm run build`와 API 응답 상태를 확인해 실제로 데이터가 들어오는지 점검했다.
+
+### 43. UI Library
+Element Plus를 설치하고 강의안의 세 가지 예제를 실제 UI 컴포넌트로 만들었다.
+
+- `UserFormValidation.vue`: 이메일과 약관 동의 여부를 검사하고 메시지 표시
+- `ProductQuantityRating.vue`: 상품 수량과 별점 입력
+- `SystemFeedbackProgress.vue`: 삭제 확인창과 진행률 표시
+
+처음에는 라이브러리를 설치하는 것과 Vue에서 컴포넌트를 사용하는 과정이 헷갈렸다. `main.js`에 Element Plus를 등록하고 각 예제에서 `el-input`, `el-button`, `el-rate`, `el-progress` 등을 사용했으며, 실행 화면과 빌드 결과를 확인했다.
+
+### 44. Weather UI Library
+Weather Axios의 기능과 라우팅 구조를 유지하면서 외부 UI Library인 PrimeVue를 적용했다. CSS만 비슷하게 만든 것이 아니라 실제 PrimeVue 컴포넌트를 import해서 사용했다.
+
+1. 구현 기능
+- `InputText`와 `Button`을 이용한 도시 검색
+- `Card`, `Tag`, `Button`을 이용한 날씨 목록과 상세 화면
+- `ProgressSpinner`를 이용한 API 로딩 표시
+- `Toast`와 `Message`를 이용한 잘못된 도시 입력 및 API 오류 안내
+- 기존 Axios 날씨 조회, Router 이동, Pinia 단위 변경 기능 유지
+
+2. 실행 방법
+- `Weather UI Library` 폴더의 `.env`에 OpenWeather API 키 작성
+- `npm install` 후 `npm run dev` 실행
+- 도시 검색, 상세보기, 단위 변경 버튼을 눌러 기능 확인
+
+3. 작성 및 수정한 내용
+- `main.js`에 PrimeVue의 Aura 테마와 ToastService를 등록했다.
+- 검색창, 날씨 카드, 로딩 및 오류 영역을 PrimeVue 컴포넌트로 교체했다.
+- 과제의 선택 사항인 Chart는 추가하지 않고 기존 날씨 기능과 연결되는 컴포넌트만 적용했다.
+
+4. AI 도구 사용 범위 및 결과 확인
+PrimeVue 설치 방법과 컴포넌트 연결 코드에서 AI 도구의 도움을 받았다. 버튼 문구와 표시 항목은 직접 확인했고, 기존 props와 emits 및 라우팅이 유지되는지도 화면에서 점검했다. 처음 설치한 버전에서 경고가 나타나 공식 설정에 맞는 버전으로 수정했으며, `npm run build`와 API 응답, 브라우저 실행 화면을 확인했다.
