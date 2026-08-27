@@ -124,3 +124,33 @@ Named Slot을 사용해 자식 컴포넌트의 header 영역과 기본 본문 �
 
 ### 37. Weather Component
 기존 날씨 화면을 `WeatherParent`, `BaseDashboardCard`, `SearchBar`, `WeatherCard`로 분리했다. 부모가 검색어와 날씨 데이터를 관리하고 props로 자식에게 전달하며, 자식은 검색어나 상세보기 이벤트를 emits로 부모에게 전달하도록 구성했다. `BaseDashboardCard`에는 slot을 사용해 검색창과 날씨 목록을 같은 카드 디자인 안에 넣었다. 추가 컴포넌트로 `WeatherStatusBar`를 만들어 검색 결과 개수와 선택한 도시의 날씨를 표시했다. 처음에는 props는 아래로 전달하고 emits는 위로 전달한다는 방향과, 이벤트 이름을 부모와 자식에서 동일하게 작성해야 한다는 점이 헷갈릴 수 있었다.
+
+## 26.08.27 (4일차)
+
+### 38. Pinia
+`main.js`에서 `createPinia()`로 Pinia 인스턴스를 등록하고, `stores/counter.js`에서 `defineStore()`를 사용해 전역 카운터 스토어를 구성했다. count는 state, doubleCount는 getters, increment 함수는 actions 역할을 하며 `StoreCounter.vue`에서 스토어 인스턴스를 불러와 사용했다. 처음에는 `useCounterStore` 자체가 스토어 데이터라고 생각하기 쉬운데, 함수로 실행한 `useCounterStore()`의 반환값을 통해 state와 actions에 접근해야 한다는 점이 헷갈릴 수 있었다.
+
+### 39. Weather Router
+날씨 화면을 Home, About, Detail, NotFound View로 나누고 Vue Router로 연결했다. 상세보기 버튼을 누르면 `router.push()`로 `/weather/:cityId` 경로에 이동하며, 동적 라우트의 도시 코드를 이용해 상세 데이터를 표시했다. 각 화면에는 Lazy Loading을 적용하고 존재하지 않는 주소에는 Catch-all 페이지가 표시되도록 했다.
+
+### 40. Weather Store
+Weather Router 실습에 Pinia를 추가해 날씨 단위를 전역 상태로 관리했다. `configStore.js`에서 현재 단위인 `unit`을 state, 단위 기호인 `unitSymbol`을 getter, 섭씨와 화씨를 변경하는 `toggleUnit()`을 action으로 작성했다.
+
+1. 구현 기능
+- 기본 단위를 섭씨로 설정하고 `UnitToggle.vue` 버튼으로 섭씨와 화씨 전환
+- `WeatherCard.vue`와 `WeatherDetailView.vue`에서 Pinia의 동일한 단위 상태 사용
+- 섭씨 원본 온도를 화씨로 변환하여 목록과 상세 화면에 적용
+- 라우터로 목록과 상세 화면을 이동해도 선택한 단위 유지
+- 개인 추가 기능으로 단위 변경 횟수인 `toggleCount` state와 안내 문구인 `toggleMessage` getter 추가
+
+2. 작성 및 수정한 내용
+- `main.js`에 `createPinia()`를 등록했다.
+- `stores/configStore.js`에 `unit`, `unitSymbol`, `toggleUnit()`을 작성했다.
+- 상단 Navigation Bar에 단위 변경 버튼을 보여주는 `UnitToggle.vue`를 추가했다.
+- `WeatherCard.vue`와 `WeatherDetailView.vue`에 온도 변환 computed를 작성했다.
+- 강의안 요구사항에 개인 기능으로 `toggleCount`와 `toggleMessage`를 추가해 단위 변경 횟수를 표시했다.
+
+3. AI 도구 사용 범위 및 결과 확인
+Pinia 스토어 파일의 기본 구조와 목록/상세 화면에서 같은 단위 상태를 사용하는 코드 초안을 작성할 때 AI 도구의 도움을 받았다. 비전공자이자 초보자 관점에서 state, getter, action의 역할을 구분하고 단위의 초기값이나 화면 문구를 바꾸는 정도는 직접 할 수 있었다. 반면 여러 화면에 같은 스토어를 연결하고 computed로 온도 변환 결과를 자동 갱신하는 구조는 아직 처음부터 혼자 작성하기 어려워 AI의 설명을 참고했다.
+
+AI가 작성한 결과는 강의안 요구사항과 다시 비교했으며 `npm run build`로 문법과 import 오류가 없는지 확인했다. 개발 서버를 실행해 홈과 상세 페이지가 정상 응답하는지 확인하고, 섭씨 원본 데이터가 변경되지 않은 상태에서 화씨 표시 값만 계산하도록 코드를 검토했다.

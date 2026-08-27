@@ -1,15 +1,12 @@
 <script setup>
-import SlotDefaultParent from './components/practices/basic/P. 177 code challenge-Component slot/SlotDefaultParent.vue'
-import SlotNamedParent from './components/practices/basic/P. 177 code challenge-Component slot/SlotNamedParent.vue'
-import SlotScopedParent from './components/practices/basic/P. 177 code challenge-Component slot/SlotScopedParent.vue'
+import AxiosJson from './components/practices/basic/P. 229 code challenge-Axios/AxiosJson.vue'
+import AxiosWeather from './components/practices/basic/P. 229 code challenge-Axios/AxiosWeather.vue'
 </script>
 
 <template>
   <div style="padding: 20px">
-    <SlotDefaultParent />
+    <AxiosWeather />
     <hr />
-    <SlotNamedParent />
-    <hr />
-    <SlotScopedParent />
+    <AxiosJson />
   </div>
 </template>
