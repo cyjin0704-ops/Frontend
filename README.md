@@ -209,7 +209,6 @@ Axios 요청 함수와 `try/catch/finally` 구조, API 키를 환경 변수로 �
 
 ### 43. UI Library
 Element Plus를 설치하고 강의안의 세 가지 예제를 실제 UI 컴포넌트로 만들었다.
-
 - `UserFormValidation.vue`: 이메일과 약관 동의 여부를 검사하고 메시지 표시
 - `ProductQuantityRating.vue`: 상품 수량과 별점 입력
 - `SystemFeedbackProgress.vue`: 삭제 확인창과 진행률 표시
@@ -238,3 +237,26 @@ Weather Axios의 기능과 라우팅 구조를 유지하면서 외부 UI Library
 
 4. AI 도구 사용 범위 및 결과 확인
 PrimeVue 설치 방법과 컴포넌트 연결 코드에서 AI 도구의 도움을 받았다. 버튼 문구와 표시 항목은 직접 확인했고, 기존 props와 emits 및 라우팅이 유지되는지도 화면에서 점검했다. 처음 설치한 버전에서 경고가 나타나 공식 설정에 맞는 버전으로 수정했으며, `npm run build`와 API 응답, 브라우저 실행 화면을 확인했다.
+
+
+### 45. Weather Deployment
+기존 Weather UI Library 프로젝트를 배포용 폴더로 옮기고, 소스 검사와 프로덕션 빌드를 실습했다.
+
+1. 구현 기능
+- ESLint로 JavaScript와 Vue 파일의 오류 검사
+- OpenWeather API 키를 `.env`에서 관리
+- Vite로 배포용 `dist` 파일 생성
+- Vite Preview로 빌드 결과를 로컬에서 실행
+
+2. 실행 방법
+- `Weather deployment` 폴더에서 `npm install` 실행
+- `npm run lint`로 코드 오류 확인
+- `npm run build`로 배포 파일 생성
+- `npm run preview` 실행 후 터미널에 표시된 주소 접속
+
+3. 작성 및 수정한 내용
+- `eslint.config.js`와 `lint` 명령을 추가했다.
+- `.gitignore`에서 `.env`와 `dist`가 Git에 올라가지 않도록 확인했다.
+
+4. AI 도구 사용 범위 및 결과 확인
+ESLint 설정과 빌드 명령을 구성할 때 AI 도구의 도움을 받았다. 명령을 실행하고 오류 메시지를 확인하는 과정은 직접 따라 할 수 있었고, 환경 변수와 Git 제외 설정의 역할도 확인했다. `npm run lint`와 `npm run build`가 성공하는지 확인했으며, Preview 서버에서 홈과 About 페이지가 정상 응답하는 것도 확인했다.
